@@ -1,7 +1,8 @@
-import { TextInput, View, StyleSheet, Alert } from 'react-native'
-import { PrimaryButton } from '../components/PrimaryButton';
+import { TextInput, View, StyleSheet, Alert, Text } from 'react-native'
+import { PrimaryButton } from '../components/ui/PrimaryButton';
 import { useState } from 'react';
 import { themeColors } from '../constants/colors';
+import { Card } from '../components/ui/Card';
 
 type StartGameScreenProps = {
   onPickNumber: (pickNumber: number) => void;
@@ -29,7 +30,7 @@ export const StartGameScreen: React.FC<StartGameScreenProps> = ({ onPickNumber }
   }
 
   return (
-    <View style={styles.inputContainer}>
+    <Card>
       <TextInput
         style={styles.numberInput}
         maxLength={2}
@@ -39,30 +40,20 @@ export const StartGameScreen: React.FC<StartGameScreenProps> = ({ onPickNumber }
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton textButton='Reset' onPress={resetEnteredNumber} />
+          <PrimaryButton  onPress={resetEnteredNumber}>
+            <Text style={styles.buttonText}>Reset</Text>
+            </PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryButton textButton='Confirm' onPress={confirmEnteredNumber} />
+          <PrimaryButton onPress={confirmEnteredNumber}><Text style={styles.buttonText}>Confirm</Text></PrimaryButton>
         </View>
       </View>
-    </View>
+    </Card>
   )
 }
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    marginHorizontal: 24,
-    alignItems: 'center',
-    padding: 16,
-    marginTop: 100,
-    backgroundColor: themeColors.primary800,
-    borderRadius: 8,
-    elevation: 5, //shadow
-    shadowColor: 'red',
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 1
-  },
+
   numberInput: {
     height: 50,
     fontSize: 20,
@@ -78,5 +69,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1
-  }
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center'
+  },
 })
